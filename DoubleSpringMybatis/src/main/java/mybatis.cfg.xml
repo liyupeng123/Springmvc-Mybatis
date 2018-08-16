@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration   
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases><!-- 在student中设置类型是不用频繁的写包名 -->
+		<typeAlias type="org.lyp.vo.Student" alias="Stu"></typeAlias>
+	</typeAliases>
+	<environments default="development">		<!-- 配置数据源的相关信息 -->
+		<environment id="development">
+			<transactionManager type="jdbc" />	<!-- 使用JDBC方式管理 -->
+			<dataSource type="POOLED">			<!-- 设置数据源类型，此时为POOLED -->
+				<property name="driver" value="org.gjt.mm.mysql.Driver" />
+				<property name="url" value="jdbc:mysql://localhost:3306/mytest?useUnicode=true&amp;characterEncoding=UTF-8" />
+				<property name="username" value="root" />
+				<property name="password" value="123456" />
+			</dataSource>
+		</environment>
+	</environments> 
+	
+	<!-- 每次映射新的类 都在次处添加 -->
+	<mappers>
+		<mapper resource="org/lyp/vo/maper/Student.xml"></mapper>
+	</mappers>
+</configuration>

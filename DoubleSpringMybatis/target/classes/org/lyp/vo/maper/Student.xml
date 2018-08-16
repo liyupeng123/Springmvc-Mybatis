@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 在每一个配置文件之中实际上都需要有一个独立的命名空间（名字，日后引用就需要此名称） -->
+<!-- 考虑到后续要进行相关的日志的配置操作，所以对于这个资源文件都建议设置一个包名称 -->
+<!-- 命名空间（Name Space），所以习惯“包名称 + VO名称 + NS” -->
+<mapper namespace="org.lyp.vo.MemberNS">
+	<cache readOnly="true" ></cache>
+	<resultMap type="Stu" id="StudentMap">
+		<!-- 数据库中的列名与vo中的实体类绑定 -->
+		 <result column="sno" property="sno"></result>
+		 <result column="sname" property="sname"></result>
+		 <result column="sage" property="sage"></result>
+	</resultMap>
+	<!-- 定义要进行数据追加操作的SQL语句，每一个SQL都需要有一个自己独立的ID，这个ID为程序引用 -->
+	<insert id="doCreate" parameterType="Stu">
+		insert into Student(sno,sname,sage)values(#{sno},#{sno},#{sage})
+	</insert>
+	<update id="doUpdate" parameterType="org.lyp.vo.Student">
+		update student set sname=#{sname},sage=#{sage} where sno=#{sno}
+	</update>
+	<delete id="doRemove" parameterType="java.lang.String">
+		delete from student where sno=#{id}
+	</delete>
+	<select id="findAll" resultMap="StudentMap">
+			select * from student
+	</select>
+	<select id="findOne" parameterType="java.lang.String" resultMap="StudentMap">
+			select * from student where sno=#{id}
+	</select>
+</mapper>
